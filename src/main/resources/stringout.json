@@ -1,0 +1,108 @@
+[
+	{"id":"teste", "value":"
+    	select m from Movie m where lower(m.title) like lower(:param)
+    "},
+	{"id":"example", "value":"
+    	select m.title, e.date, e.hour, p.name
+		from vaicomecar.movie m
+		  join vaicomecar.movie_event me on me.fk_movie = m.id
+		  join vaicomecar.event e on e.id = me.fk_event
+		  join vaicomecar.place p on p.id = e.fk_place
+		where 1=1
+		  and e.date = '2016-03-23'
+		  and m.title ilike '%Deadpool%'
+		  and cast(substring(e.hour from 0 for 3)||substring(e.hour from 4 for 5) as integer) between 1700 and 1900
+		order by m.title, e.date	
+    "},
+    {"id":"movieGenericSearch", "value":"
+    	select distinct m.*
+			from vaicomecar.movie m
+			  join vaicomecar.movie_event me on me.fk_movie = m.id
+			  join vaicomecar.event e on e.id = me.fk_event
+			  join vaicomecar.place p on p.id = e.fk_place
+			  join vaicomecar.address a on a.id = p.fk_address
+			where 1=1
+			 <| :date != null |>
+    	     	and e.data = :date
+    	     <||>
+    	     
+    	     <| :city != null |>
+    	     	and a.city ilike :city
+    	     <||>
+    	     
+    	     <| :initialTime != null && :finalTime != null |>
+    	     	and cast(substring(e.hour from 0 for 3)||substring(e.hour from 4 for 5) as integer) between :initialTime and :finalTime
+    	     <||>
+    	     
+    	     <| :query != null && :findByMovie == 'true' |>
+    	     	and m.title ilike :query
+    	     <||>
+    	     
+    	     <| :query != null && :findByPlace == 'true' |>
+    	     	and p.name ilike :query
+    	     <||>
+    	     
+    	     <| :query != null && :findAll == true |>
+    	     	and (m.title ilike :query or p.name ilike :query)
+    	     <||>
+    	     
+			order by m.title
+    "},
+    {"id":"existsMovieByTitle", "value":"
+    	select case when (count(m) > 0) then true else false end from Movie m where m.title = :title
+    "},
+    {"id":"existsMovieByOriginalTitle", "value":"
+    	select case when (count(m) > 0) then true else false end from Movie m where m.originalTitle = :originalTitle
+    "},
+    {"id":"existsMovieByIMDBId", "value":"
+    	select case when (count(m) > 0) then true else false end from Movie m where m.codigoIMDB = :codigoIMDB
+    "},
+    {"id":"findMovieByTitleOrOriginalTitle", "value":"
+    	from Movie m where lower(m.title) like lower(:name) or lower(m.originalTitle) like lower(:name)
+    "},
+    {"id":"findPlaceByDescription", "value":"
+    	from Place p where lower(p.description) like lower(:description)
+    "},
+    {"id":"findEventsByMovieTitleOrMovieOriginalTitleOrPlaceDescription", "value":"
+    	from Event e join fetch e.movieEvents me join fetch e.place 
+    	 where lower(me.movie.title) like lower(:value) or lower(me.movie.originalTitle) like lower(:value) or lower(e.place.description) like lower(:value)
+    "},
+    {"id":"existsPlaceByName", "value":"
+    	select case when (count(p) > 0) then true else false end from Place p where p.name = :name
+    "},
+    {"id":"findPlaceByName", "value":"
+    	from Place p where lower(p.name) like lower(:name)
+    "},
+    {"id":"findMovieByExactTitle", "value":"
+    	from Movie m where m.title = :title
+    "},
+    {"id":"findMovieByIMDBId", "value":"
+    	from Movie m where m.codigoIMDB = :IMDBId
+    "},
+    {"id":"findMovieByExactTitleAndYear", "value":"
+    	from Movie m where m.title = :title and m.year = :year
+    "},
+    {"id":"findByPlaceAndDateAndHour", "value":"
+    	from Event e where e.place.id = :placeId and e.date = :date and e.hour = :hour
+    "},
+    {"id":"existsMovieEventByMovieAndEvent", "value":"
+    	select case when (count(me) > 0) then true else false end from MovieEvent me where me.movie.id = :movieId and me.event.id = :eventId
+    "},
+    {"id":"findMovieEventsByMovieTitleOrMovieOriginalTitleOrPlaceName", "value":"
+    	from MovieEvent me join fetch me.movie m join fetch me.event e join fetch e.place p
+    		 where lower(m.title) like lower(:value) or lower(m.originalTitle) like lower(:value) or lower(p.name) like lower(:value)
+    "},
+    {"id":"findMovieByTitleOrOriginalTitleOrPlaceName", "value":"
+    	select distinct m from Movie m join m.movieEvents me join me.event.place p
+    		 where lower(m.title) like lower(:value) or lower(m.originalTitle) like lower(:value) or lower(p.name) like lower(:value)
+    "},
+    {"id":"findDomainItemByLabel", "value":"
+  		from DomainItem di where di.label = :label  	
+    "},
+    {"id":"existsEventRoomTypeByMovieEventAnDomainItem", "value":"
+  		select case when (count(ert) > 0) then true else false end from EventRoomType ert where ert.movieEvent.id = :movieEventId and ert.domainItem.id = :domainItemId
+    "},
+    {"id":"findUserByLoginAndPass", "value":"
+  		from User where login = :login and password = :password
+    "}
+]
