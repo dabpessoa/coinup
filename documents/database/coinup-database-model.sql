@@ -1,6 +1,18 @@
 -- DROP SCHEMA coinup;
 CREATE SCHEMA coinup AUTHORIZATION postgres;
 
+-- drop table coinup.caixa
+CREATE TABLE coinup.caixa (
+   id bigserial,
+   saldo numeric(12,2),
+   vl_total_entrada numeric(12,2),
+   vl_total_saida numeric(12,2),
+   qtd_entradas int,
+   qtd_saidas int,
+   dt_ultima_atualizacao date,
+   PRIMARY KEY (id)
+);
+
 -- drop table coinup.tipo_movimentacao
 CREATE TABLE coinup.tipo_movimentacao (
    id bigserial,

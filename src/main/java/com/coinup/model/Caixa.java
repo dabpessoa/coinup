@@ -1,13 +1,38 @@
 package com.coinup.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.coinup.exceptions.SaldoNegativoException;
+import com.coinup.framework.dao.BaseEntity;
 import com.coinup.utils.NumberUtils;
 
-public class Caixa {
+@Entity
+@Table (name = "caixa" , schema = "coinup")
+public class Caixa extends BaseEntity {
+	private static final long serialVersionUID = 3515594289200993410L;
 
+	@Column(name="saldo")
 	private BigDecimal saldo;
+	
+	@Column(name="vl_total_entrada")
+	private BigDecimal totalEntrada;
+	
+	@Column(name="vl_total_saida")
+	private BigDecimal totalSaida;
+	
+	@Column(name="qtd_entradas")
+	private Integer quantidadeEntradas;
+	
+	@Column(name="qtd_saidas")
+	private Integer quantidadeSaidas;
+	
+	@Column(name="dt_ultima_atualizacao")
+	private Date ultimaAtualizacao;
 	
 	public Caixa() {}
 	
@@ -37,10 +62,52 @@ public class Caixa {
 	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
+	
+	public BigDecimal getTotalEntrada() {
+		return totalEntrada;
+	}
+
+	public void setTotalEntrada(BigDecimal totalEntrada) {
+		this.totalEntrada = totalEntrada;
+	}
+
+	public BigDecimal getTotalSaida() {
+		return totalSaida;
+	}
+
+	public void setTotalSaida(BigDecimal totalSaida) {
+		this.totalSaida = totalSaida;
+	}
+
+	public Integer getQuantidadeEntradas() {
+		return quantidadeEntradas;
+	}
+
+	public void setQuantidadeEntradas(Integer quantidadeEntradas) {
+		this.quantidadeEntradas = quantidadeEntradas;
+	}
+
+	public Integer getQuantidadeSaidas() {
+		return quantidadeSaidas;
+	}
+
+	public void setQuantidadeSaidas(Integer quantidadeSaidas) {
+		this.quantidadeSaidas = quantidadeSaidas;
+	}
+
+	public Date getUltimaAtualizacao() {
+		return ultimaAtualizacao;
+	}
+
+	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
+		this.ultimaAtualizacao = ultimaAtualizacao;
+	}
 
 	@Override
 	public String toString() {
-		return "Caixa [saldo=" + saldo + "]";
+		return "Caixa [saldo=" + saldo + ", totalEntrada=" + totalEntrada + ", totalSaida=" + totalSaida
+				+ ", quantidadeEntradas=" + quantidadeEntradas + ", quantidadeSaidas=" + quantidadeSaidas
+				+ ", ultimaAtualizacao=" + ultimaAtualizacao + "]";
 	}
 	
 }

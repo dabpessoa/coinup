@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
 	<context:property-placeholder location="classpath:project.properties" />
-	<context:component-scan base-package="com.atma.*" />
+	<context:component-scan base-package="com.coinup.*" />
             
 	<context:annotation-config />
 	<tx:annotation-driven  />
@@ -27,18 +27,7 @@
         </property>
     </bean>
     
-    <bean id="applicationContextProvider" class="com.atma.vaicomecar.service.util.ApplicationContextProvider" lazy-init="false" />
-    
-    <!--  implementação do View Scope para o Spring -->
-	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
-		<property name="scopes">
-			<map>
-				<entry key="view">
-					<bean class="com.atma.vaicomecar.enviroment.scope.ViewScope" />
-				</entry>
-			</map>
-		</property>
-	</bean>
+    <bean id="applicationContextProvider" class="com.coinup.utils.ApplicationContextProvider" lazy-init="false" />
 	
 	<!-- traduzir as exceptions de persistencia do spring -->
 	<bean id="persistenceExceptionTranslationPostProcessor" 
@@ -72,8 +61,7 @@
 		</property>
 		<property name="packagesToScan">
 			<list>
-				<value>com.atma.vaicomecar.bean.model</value>
-				<value>com.atma.accesscontrol.model</value>
+				<value>com.coinup.model</value>
 			</list>
 		</property>
 	</bean>
