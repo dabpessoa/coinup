@@ -1,27 +1,36 @@
 -- DROP SCHEMA coinup;
 CREATE SCHEMA coinup AUTHORIZATION postgres;
 
--- drop table coinup.caixa
-CREATE TABLE coinup.caixa (
-   id bigserial,
-   saldo numeric(12,2),
-   vl_total_entrada numeric(12,2),
-   vl_total_saida numeric(12,2),
-   qtd_entradas int,
-   qtd_saidas int,
-   dt_ultima_atualizacao date,
-   PRIMARY KEY (id)
-);
-
--- drop table coinup.tipo_movimentacao
-CREATE TABLE coinup.tipo_movimentacao (
+-- drop table coinup.caixa_periodicidade;
+create table coinup.caixa_periodicidade (
    id bigserial,
    label character varying,
    descricao character varying,
    PRIMARY KEY (id)
 );
 
--- drop table coinup.pessoa
+-- drop table coinup.caixa;
+CREATE TABLE coinup.caixa (
+  id bigserial NOT NULL,
+  saldo numeric(12,2),
+  vl_total_entrada numeric(12,2),
+  vl_total_saida numeric(12,2),
+  qtd_entradas integer,
+  qtd_saidas integer,
+  dt_ultima_atualizacao date,
+  cd_caixa_periodicidade bigint,
+  PRIMARY KEY (id)
+)
+
+-- drop table coinup.tp_movimentacao;
+CREATE TABLE coinup.tp_movimentacao (
+   id bigserial,
+   label character varying,
+   descricao character varying,
+   PRIMARY KEY (id)
+);
+
+-- drop table coinup.pessoa;
 CREATE TABLE coinup.pessoa (
    id bigserial, 
    cpf_cnpj character varying, 
@@ -32,26 +41,26 @@ CREATE TABLE coinup.pessoa (
    PRIMARY KEY (id)
 );
 
--- drop table coinup.tipo_fonte
-CREATE TABLE coinup.tipo_fonte (
+-- drop table coinup.tp_fonte;
+CREATE TABLE coinup.tp_fonte (
    id bigserial,
    label character varying,
    descricao character varying,
    PRIMARY KEY (id)
 );
 
--- drop table coinup.fonte
+-- drop table coinup.fonte;
 CREATE TABLE coinup.fonte (
    id bigserial,
    saldo numeric(12,2),
    descricao character varying,
    dt_cadastro date,
    dt_criacao date,
-   cd_tipo_fonte bigint,
+   cd_tp_fonte bigint,
    PRIMARY KEY (id)
 );
 
--- drop table coinup.banco
+-- drop table coinup.banco;
 CREATE TABLE coinup.banco (
    id bigserial,
    codigo integer,
@@ -59,7 +68,7 @@ CREATE TABLE coinup.banco (
    PRIMARY KEY (id)
 );
 
--- drop table coinup.fonte_conta_bancaria
+-- drop table coinup.fonte_conta_bancaria;
 CREATE TABLE coinup.fonte_conta_bancaria (
    id bigserial,
    numero int,
@@ -71,7 +80,7 @@ CREATE TABLE coinup.fonte_conta_bancaria (
    PRIMARY KEY (id)
 );
 
--- drop table coinup.bandeira_cartao
+-- drop table coinup.bandeira_cartao;
 CREATE TABLE coinup.bandeira_cartao(
    id bigserial,
    label character varying,
@@ -79,7 +88,7 @@ CREATE TABLE coinup.bandeira_cartao(
    PRIMARY KEY (id)
 );
 
--- drop table coinup.fonte_cartao_credito
+-- drop table coinup.fonte_cartao_credito;
 CREATE TABLE coinup.fonte_cartao_credito (
    id bigserial,
    limite numeric(12,2),
@@ -89,7 +98,7 @@ CREATE TABLE coinup.fonte_cartao_credito (
    PRIMARY KEY (id)
 );
 
--- drop table coinup.fonte_clt
+-- drop table coinup.fonte_clt;
 CREATE TABLE coinup.fonte_clt (
    id bigserial,
    salario numeric(12,2),
@@ -98,7 +107,7 @@ CREATE TABLE coinup.fonte_clt (
    PRIMARY KEY (id)
 );
 
--- drop table coinup.movimentacao_financeira
+-- drop table coinup.movimentacao_financeira;
 CREATE TABLE coinup.movimentacao_financeira (
    id bigserial, 
    valor numeric(12,2), 
@@ -106,20 +115,20 @@ CREATE TABLE coinup.movimentacao_financeira (
    qtd_parcelas integer, 
    quitada boolean, 
    descricao character varying,
-   cd_tipo_movimentacao bigint, 
+   cd_tp_movimentacao bigint, 
    cd_pessoa bigint, 
    cd_fonte bigint, 
    PRIMARY KEY (id)
 );
 
 ALTER TABLE coinup.fonte
-  ADD FOREIGN KEY (cd_tipo_fonte) 
-  REFERENCES coinup.tipo_fonte (id) 
+  ADD FOREIGN KEY (cd_tp_fonte) 
+  REFERENCES coinup.tp_fonte (id) 
   ON UPDATE RESTRICT ON DELETE RESTRICT;
 
 ALTER TABLE coinup.movimentacao_financeira
-  ADD FOREIGN KEY (cd_tipo_movimentacao) 
-  REFERENCES coinup.tipo_movimentacao (id) 
+  ADD FOREIGN KEY (cd_tp_movimentacao) 
+  REFERENCES coinup.tp_movimentacao (id) 
   ON UPDATE RESTRICT ON DELETE RESTRICT;  
 
 ALTER TABLE coinup.fonte_conta_bancaria
@@ -153,8 +162,8 @@ ALTER TABLE coinup.fonte_clt
   ON UPDATE RESTRICT ON DELETE RESTRICT;  
 
 ALTER TABLE coinup.movimentacao_financeira
-  ADD FOREIGN KEY (cd_tipo_movimentacao) 
-  REFERENCES coinup.tipo_movimentacao (id) 
+  ADD FOREIGN KEY (cd_tp_movimentacao) 
+  REFERENCES coinup.tp_movimentacao (id) 
   ON UPDATE RESTRICT ON DELETE RESTRICT;  
 
 ALTER TABLE coinup.movimentacao_financeira
@@ -165,5 +174,10 @@ ALTER TABLE coinup.movimentacao_financeira
 ALTER TABLE coinup.movimentacao_financeira
   ADD FOREIGN KEY (cd_fonte) 
   REFERENCES coinup.fonte (id) 
+  ON UPDATE RESTRICT ON DELETE RESTRICT;
+  
+ALTER TABLE coinup.caixa
+  ADD FOREIGN KEY (cd_caixa_periodicidade) 
+  REFERENCES coinup.caixa_periodicidade (id) 
   ON UPDATE RESTRICT ON DELETE RESTRICT;
 

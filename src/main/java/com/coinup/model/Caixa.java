@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.coinup.exceptions.SaldoNegativoException;
@@ -33,6 +35,16 @@ public class Caixa extends BaseEntity {
 	
 	@Column(name="dt_ultima_atualizacao")
 	private Date ultimaAtualizacao;
+	
+	@Column(name="dt_abertura")
+	private Date dataAbertura;
+	
+	@Column(name="dt_fechamento")
+	private Date dataFechamento;
+	
+	@ManyToOne
+	@JoinColumn(name="cd_caixa_periodicidade", referencedColumnName="id")
+	private CaixaPeriodicidade caixaPeriodicidade;
 	
 	public Caixa() {}
 	
@@ -101,6 +113,14 @@ public class Caixa extends BaseEntity {
 
 	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
 		this.ultimaAtualizacao = ultimaAtualizacao;
+	}
+	
+	public CaixaPeriodicidade getCaixaPeriodicidade() {
+		return caixaPeriodicidade;
+	}
+	
+	public void setCaixaPeriodicidade(CaixaPeriodicidade caixaPeriodicidade) {
+		this.caixaPeriodicidade = caixaPeriodicidade;
 	}
 
 	@Override
