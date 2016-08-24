@@ -9,6 +9,8 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
+import com.coinup.service.utils.ApplicationContextProvider;
+
 public class SpringUtils {
 
 	public static final String contextPath = "classpath:applicationContext.xml";

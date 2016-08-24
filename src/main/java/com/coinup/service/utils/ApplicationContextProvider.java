@@ -1,4 +1,4 @@
-package com.coinup.utils;
+package com.coinup.service.utils;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

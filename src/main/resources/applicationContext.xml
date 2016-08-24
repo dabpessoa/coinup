@@ -27,7 +27,7 @@
         </property>
     </bean>
     
-    <bean id="applicationContextProvider" class="com.coinup.utils.ApplicationContextProvider" lazy-init="false" />
+    <bean id="applicationContextProvider" class="com.coinup.service.utils.ApplicationContextProvider" lazy-init="false" />
 	
 	<!-- traduzir as exceptions de persistencia do spring -->
 	<bean id="persistenceExceptionTranslationPostProcessor" 

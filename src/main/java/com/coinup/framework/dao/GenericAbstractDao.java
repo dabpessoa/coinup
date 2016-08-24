@@ -23,16 +23,16 @@ public class GenericAbstractDao<T extends BaseEntity, I extends Serializable> {
 		this.keyClass = (Class<I>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[1];
 	}
 
-	public void insert(T bean) {
-		getEntityManager().persist(bean);
+	public void insert(T entity) {
+		getEntityManager().persist(entity);
 	}
 
-	public void delete(T bean) {
-		getEntityManager().remove(bean);
+	public void delete(T entity) {
+		getEntityManager().remove(entity);
 	}
 
-	public T update(T bean) {
-		return getEntityManager().merge(bean);
+	public T update(T entity) {
+		return getEntityManager().merge(entity);
 	}
 
 	public T findByKey(I key) {
