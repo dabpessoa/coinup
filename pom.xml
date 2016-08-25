@@ -231,7 +231,7 @@
 	</repositories>
 
 	<build>
-		<finalName>vaicomecar</finalName>
+		<finalName>coinup</finalName>
 		<outputDirectory>${project.basedir}/build/classes</outputDirectory>
 		<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
 		<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
