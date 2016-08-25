@@ -29,6 +29,17 @@
     
     <bean id="applicationContextProvider" class="com.coinup.service.utils.ApplicationContextProvider" lazy-init="false" />
 	
+	<!--  implementação do View Scope para o Spring -->
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="view">
+					<bean class="com.coinup.utils.SpringViewScope" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+	
 	<!-- traduzir as exceptions de persistencia do spring -->
 	<bean id="persistenceExceptionTranslationPostProcessor" 
 		  class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
