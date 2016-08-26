@@ -1,5 +1,5 @@
--- DROP SCHEMA coinup;
-CREATE SCHEMA coinup AUTHORIZATION postgres;
+-- DROP SCHEMA coinup cascade;
+CREATE SCHEMA coinup;
 
 -- drop table coinup.caixa_periodicidade;
 create table coinup.caixa_periodicidade (
@@ -20,7 +20,7 @@ CREATE TABLE coinup.caixa (
   dt_ultima_atualizacao date,
   cd_caixa_periodicidade bigint,
   PRIMARY KEY (id)
-)
+);
 
 -- drop table coinup.tp_movimentacao;
 CREATE TABLE coinup.tp_movimentacao (
@@ -107,6 +107,14 @@ CREATE TABLE coinup.fonte_clt (
    PRIMARY KEY (id)
 );
 
+-- drop table coinup.categoria_movimentacao;
+create table coinup.categoria_movimentacao (
+   id bigserial,
+   label character varying,
+   descricao character varying,
+   primary key (id)
+);
+
 -- drop table coinup.movimentacao_financeira;
 CREATE TABLE coinup.movimentacao_financeira (
    id bigserial, 
@@ -115,7 +123,8 @@ CREATE TABLE coinup.movimentacao_financeira (
    qtd_parcelas integer, 
    quitada boolean, 
    descricao character varying,
-   cd_tp_movimentacao bigint, 
+   cd_tp_movimentacao bigint,
+   cd_categoria_movimentacao bigint,
    cd_pessoa bigint, 
    cd_fonte bigint, 
    PRIMARY KEY (id)
