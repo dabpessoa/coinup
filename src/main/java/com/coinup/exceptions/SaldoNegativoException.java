@@ -12,5 +12,4 @@ public class SaldoNegativoException extends ApplicationException {
 	public SaldoNegativoException(String message, Throwable throwable) {
 		super(message, throwable);
 	}
-	
 }

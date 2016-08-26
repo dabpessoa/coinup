@@ -13,8 +13,8 @@ public class CaixaController extends GenericAbstractController<Caixa, Long, Caix
 
 	public CaixaController() {}
 	
-	public void abrirCaixa() {
-		getService().abrirCaixa(getEntity());
+	public void criarCaixa() {
+		getService().criarCaixa(getEntity());
 	}
 	
 	public void fecharCaixa() {

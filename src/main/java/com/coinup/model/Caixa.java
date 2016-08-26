@@ -36,8 +36,8 @@ public class Caixa extends BaseEntity {
 	@Column(name="dt_ultima_atualizacao")
 	private Date ultimaAtualizacao;
 	
-	@Column(name="dt_abertura")
-	private Date dataAbertura;
+	@Column(name="dt_criacao")
+	private Date dataCriacao;
 	
 	@Column(name="dt_fechamento")
 	private Date dataFechamento;
@@ -113,6 +113,22 @@ public class Caixa extends BaseEntity {
 
 	public void setUltimaAtualizacao(Date ultimaAtualizacao) {
 		this.ultimaAtualizacao = ultimaAtualizacao;
+	}
+	
+	public Date getDataCriacao() {
+		return dataCriacao;
+	}
+	
+	public void setDataCriacao(Date dataCriacao) {
+		this.dataCriacao = dataCriacao;
+	}
+	
+	public Date getDataFechamento() {
+		return dataFechamento;
+	}
+	
+	public void setDataFechamento(Date dataFechamento) {
+		this.dataFechamento = dataFechamento;
 	}
 	
 	public CaixaPeriodicidade getCaixaPeriodicidade() {

@@ -18,6 +18,8 @@ CREATE TABLE coinup.caixa (
   qtd_entradas integer,
   qtd_saidas integer,
   dt_ultima_atualizacao date,
+  dt_criacao date,
+  dt_fechamento date,
   cd_caixa_periodicidade bigint,
   PRIMARY KEY (id)
 );
