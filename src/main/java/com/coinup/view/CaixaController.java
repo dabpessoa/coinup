@@ -11,6 +11,14 @@ import com.coinup.service.CaixaService;
 @Scope("view")
 public class CaixaController extends GenericAbstractController<Caixa, Long, CaixaService> {
 
+	public CaixaController() {}
 	
+	public void abrirCaixa() {
+		getService().abrirCaixa(getEntity());
+	}
+	
+	public void fecharCaixa() {
+		getService().fecharCaixa(getEntity());
+	}
 	
 }

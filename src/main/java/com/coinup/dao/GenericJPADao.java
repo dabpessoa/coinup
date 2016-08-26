@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import com.coinup.dao.stringout.JPAStringOutDaoHelper;
 import com.coinup.model.Caixa;
 import com.coinup.utils.SpringUtils;
 
@@ -14,6 +15,15 @@ import com.coinup.utils.SpringUtils;
  *
  */
 public class GenericJPADao {
+	
+	/**
+	 * Método que utiliza a biblioteca 'Stringout' para auxilizar nas centralização das 
+	 * consultas em um único arquivo.
+	 * @return
+	 */
+	public static JPAStringOutDaoHelper getStringOutDaoHelper() {
+		return SpringUtils.getBean("stringOutJPAHelper");
+	}
 	
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> findAll(Class<T> entityClass) {

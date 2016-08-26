@@ -1,5 +1,5 @@
 [
-	{"id":"teste", "value":"
-    	select m from Movie m where lower(m.title) like lower(:param)
+	{"id":"caixaAbertoNoPeriodo", "value":"
+		select case when (count(1) > 0) then true else false end from Caixa c where c.caixaPeriodicidade.id = :idPeriodicidade
     "}
 ]

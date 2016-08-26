@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 import com.coinup.dao.stringout.JPAStringOutDaoHelper;
 
@@ -18,6 +19,7 @@ public class Config {
 	private ApplicationContext springContext;
 	
 	@Bean
+	@Lazy(true)
 	public JPAStringOutDaoHelper stringOutJPAHelper() {
 		return new JPAStringOutDaoHelper((EntityManager)springContext.getBean("entityManager"), StringOutType.JSON);
 	}

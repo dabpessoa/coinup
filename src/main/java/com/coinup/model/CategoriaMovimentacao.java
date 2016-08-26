@@ -1,59 +1,41 @@
 package com.coinup.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import com.coinup.framework.dao.BaseEntity;
 
-@Entity
-@Table(name="caixa_periodicidade", schema="coinup")
-public class CaixaPeriodicidade extends BaseEntity {
-	private static final long serialVersionUID = 7663316095550832491L;
+public class CategoriaMovimentacao extends BaseEntity {
+	private static final long serialVersionUID = 6862936660257401821L;
 
 	public static enum TYPES {
-		DIA("dia"),
-		MES("mes"),
-		ANO("ano"),
-		DECADA("decada");
-		
-		private String label;
-		private TYPES(String label) {this.label = label;}
-		public String getLabel(){return this.label;};
+		ALIMENTACAO,
+		LAZER,
+		CONTAS,
+		ESCOLA,
+		FACULDADE,
+		UNIVERSIDADE,
+		TRABALHO,
+		ESPOSA,
+		MARIDO,
+		FILHOS,
+		PARENTES,
+		FAMILIA,
+		AJUDA,
+		EMPRESTIMO;
 	}
 	
-	@Column(name="label")
 	private String label;
-	
-	@Column(name="descricao")
 	private String descricao;
 	
-	public CaixaPeriodicidade() {}
-	
-	public CaixaPeriodicidade(Long id) {
-		super(id);
-	}
+	public CategoriaMovimentacao() {}
 
-	public CaixaPeriodicidade(String label) {
+	public CategoriaMovimentacao(String label) {
 		this.label = label;
 	}
 	
-	public CaixaPeriodicidade(String label, String descricao) {
-		this.label = label;
+	public CategoriaMovimentacao(String label, String descricao) {
+		this(label);
 		this.descricao = descricao;
 	}
-	
-	public TYPES findCaixaPeriodicidadeType() {
-		if (getLabel() == null) return null;
-		TYPES[] types = TYPES.values();
-		for (TYPES type : types) {
-			if (type.getLabel().equalsIgnoreCase(this.getLabel())) {
-				return type;
-			}
-		}
-		return null;
-	}
-	
+
 	public String getLabel() {
 		return label;
 	}
@@ -87,7 +69,7 @@ public class CaixaPeriodicidade extends BaseEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CaixaPeriodicidade other = (CaixaPeriodicidade) obj;
+		CategoriaMovimentacao other = (CategoriaMovimentacao) obj;
 		if (descricao == null) {
 			if (other.descricao != null)
 				return false;
@@ -103,7 +85,7 @@ public class CaixaPeriodicidade extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "CaixaPeriodicidade [label=" + label + ", descricao=" + descricao + "]";
+		return "CategoriaMovimentacao [label=" + label + ", descricao=" + descricao + "]";
 	}
 	
 }
