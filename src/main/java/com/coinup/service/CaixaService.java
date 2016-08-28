@@ -23,11 +23,11 @@ public class CaixaService extends GenericAbstractService<Caixa, Long, CaixaDao> 
 	public void criarCaixa(Caixa caixa) {
 		caixa.setSaldo(BigDecimal.ZERO);
 		caixa.setDataCriacao(new Date());
-		inserirCaixaPrePreenchido(caixa);
+		criarCaixaPrePreenchido(caixa);
 	}
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Throwable.class)
-	public void inserirCaixaPrePreenchido(Caixa caixa) {
+	public void criarCaixaPrePreenchido(Caixa caixa) {
 		if (caixa.getId() != null) {
 			throw new InsertIdNotNullException();
 		}
