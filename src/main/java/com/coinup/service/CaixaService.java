@@ -2,6 +2,7 @@ package com.coinup.service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -53,6 +54,11 @@ public class CaixaService extends GenericAbstractService<Caixa, Long, CaixaDao> 
 		if (possuiCaixaAbertoParaPeriodo) {
 			throw new CaixaAbertoNoPeriodoException();
 		}
+	}
+	
+	@Override
+	public List<Caixa> find(Caixa entity) {
+		return null;
 	}
 	
 }

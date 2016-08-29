@@ -20,6 +20,11 @@ public class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
+	/**
+	 * Método para inicializar objetos que a entidade depende.
+	 */
+	public void init() {}
+	
 	public Long getId() {
 		return id;
 	}

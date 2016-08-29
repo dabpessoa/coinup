@@ -6,19 +6,20 @@ import java.util.List;
 import com.coinup.framework.dao.BaseEntity;
 import com.coinup.framework.dao.GenericAbstractDao;
 
-public interface GenericService<T extends BaseEntity, ID extends Serializable> extends Serializable {
+public interface GenericService<Entity extends BaseEntity, key extends Serializable> extends Serializable {
 	
-	void insert(T bean);
-	void update(T bean);
-	void delete(T bean);
+	void insert(Entity entity);
+	void update(Entity entity);
+	void delete(Entity entity);
 	
 	Long getRowCount();	
 	
-	T findByKey(ID id);
+	Entity findByKey(key id);
 	
-	List<T> findAll();
-	List<T> findAll(int firstItem, int maxItem);
+	List<Entity> findAll();
+	List<Entity> findAll(int firstItem, int maxItem);
+	List<Entity> find(Entity entity);
 
-	GenericAbstractDao<T, ID> getRepository();
+	GenericAbstractDao<Entity, key> getRepository();
 	
 }

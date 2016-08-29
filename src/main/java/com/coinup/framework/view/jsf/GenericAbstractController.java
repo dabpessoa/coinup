@@ -1,6 +1,8 @@
 package com.coinup.framework.view.jsf;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,23 +16,50 @@ public class GenericAbstractController<Entity extends BaseEntity, Key extends Se
 	private Logger logger;
 	
 	protected Entity entity;
+	protected Entity searchEntity;
 	protected Service service;
 	
 	protected Class<Entity> entityClass;
 	protected Class<Key> keyClass;
 	protected Class<Service> serviceClass;
 	
+	protected List<Entity> searchList;
+	
 	public GenericAbstractController() {}
+	
+	public void find() {
+		searchList = getService().find(getSearchEntity());
+	}
 	
 	public Entity getEntity() {
 		if(entity == null){
 			try {
 				entity = getEntityClass().newInstance();
+				entity.init();
 			} catch (InstantiationException | IllegalAccessException e) {
 				getLogger().log(Level.SEVERE, "Erro ao instanciar a entidade  " + getEntityClass(), e);
 			} 
 		}
 		return entity;
+	}
+	
+	public Entity getSearchEntity() {
+		if(searchEntity == null){
+			try {
+				searchEntity = getEntityClass().newInstance();
+				searchEntity.init();
+			} catch (InstantiationException | IllegalAccessException e) {
+				getLogger().log(Level.SEVERE, "Erro ao instanciar a entidade  " + getEntityClass(), e);
+			} 
+		}
+		return searchEntity;
+	}
+	
+	public List<Entity> getSearchList() {
+		if (searchList == null) {
+			searchList = new ArrayList<Entity>();
+		}
+		return searchList;
 	}
 	
 	public Service getService() {

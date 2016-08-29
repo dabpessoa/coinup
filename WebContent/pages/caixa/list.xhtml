@@ -11,12 +11,47 @@
 
 	<ui:define name="list-body">
 
+		<ui:param name="controller" value="#{caixaController}"/>
+
 		<div class="container-fluid">
 			
 			<div class="row">
 				<div class="col-sm-12">
 				
-					Olá... teste de lista...
+					<h:panelGroup>
+					
+						<h:panelGroup>
+						
+							<h:form>
+							
+								<h:panelGrid>
+								
+									<p:outputLabel value="Saldo"/>
+									<h:inputText value="#{controller.searchEntity.saldo}"/>
+								
+								</h:panelGrid>
+							
+								<p:commandButton value="Pesquisar" action="#{controller.find}"/>
+							
+							</h:form>
+						
+						</h:panelGroup>
+					
+						<h:panelGroup>
+						
+							<p:dataTable emptyMessage="Nenhum registro encontrado."
+								value="#{controller.searchList}"
+								var="entity">
+							
+								<p:column headerText="Saldo">
+									<h:outputText value="#{entity.saldo}"/>
+								</p:column>
+							
+							</p:dataTable>
+							
+						</h:panelGroup>
+					
+					</h:panelGroup>
 				
 				</div>
 			</div>
