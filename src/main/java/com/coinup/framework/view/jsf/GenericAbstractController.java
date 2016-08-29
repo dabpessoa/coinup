@@ -64,6 +64,18 @@ public class GenericAbstractController<Entity extends BaseEntity, Key extends Se
 		return serviceClass;
 	}
 	
+	public String getFormPageLocation() {
+		return getCrudAnnotation().formPageLocation();
+	}
+	
+	public String getListPageLocation() {
+		return getCrudAnnotation().listPageLocation();
+	}
+	
+	private Crud getCrudAnnotation() {
+		return this.getClass().getAnnotation(Crud.class);
+	}
+	
 	public Logger getLogger() {
 		if(logger == null){
 			logger = Logger.getLogger(getClass().getName());
