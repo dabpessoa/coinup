@@ -58,7 +58,7 @@ public class CaixaService extends GenericAbstractService<Caixa, Long, CaixaDao> 
 	
 	@Override
 	public List<Caixa> find(Caixa entity) {
-		return null;
+		return getRepository().findAll();
 	}
 	
 }
