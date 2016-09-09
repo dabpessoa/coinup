@@ -5,8 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.coinup.exceptions.SaldoNegativoException;
@@ -15,9 +18,16 @@ import com.coinup.utils.NumberUtils;
 
 @Entity
 @Table (name = "caixa" , schema = "coinup")
+@SequenceGenerator(name="seq", sequenceName="caixa_id_seq")
 public class Caixa extends BaseEntity {
 	private static final long serialVersionUID = 3515594289200993410L;
 
+	@Override
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public Long getId() {
+		return super.getId();
+	}
+	
 	@Column(name="saldo")
 	private BigDecimal saldo;
 	

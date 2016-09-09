@@ -9,11 +9,41 @@
 	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
     xmlns:jsf="http://xmlns.jcp.org/jsf">
 
-	<ui:define name="content">
+	<ui:define name="form-body">
 	
 		<!-- Implementar layout do template de lista -->
+		<h:panelGroup id="formPageGroupId">
 		
-		<ui:insert name="form-body"/>
+			<ui:param name="controller" value="#{caixaController}"/>
+			
+			<h:panelGroup>
+			
+				<h:form id="formulario" prependId="false">
+				
+					<h:panelGrid columns="2">
+					
+						<h:outputText value="Saldo: "/>
+						<h:inputText value="#{controller.entity.saldo}"/>
+						
+					
+					</h:panelGrid>
+					
+					<p:commandButton value="Salvar" actionListener="#{controller.save()}" oncomplete="handleComplete(xhr, status, args);" update="formPageGroupId"/>
+					<h:outputLink id="navigateListPageLinkId" value="#{baseURL}#{controller.listPageLocation}" style="display: none;"/>
+				
+				</h:form>	
+			
+			</h:panelGroup>
+			
+			<script type="text/javascript">
+				function handleComplete(xhr, status, args) {
+					if (!args.validationFailed &amp;&amp; !args.erroAjuste) {
+						// navigate
+						$("#navigateListPageLinkId").click();
+					}
+				}
+			</script>
+		</h:panelGroup>
 		
 	</ui:define>
 </ui:composition>

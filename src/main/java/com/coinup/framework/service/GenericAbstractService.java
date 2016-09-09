@@ -29,45 +29,45 @@ public abstract class GenericAbstractService<T extends BaseEntity, ID extends Se
 	@Override
 	@Transactional(readOnly=true)
 	public List<T> findAll() {
-		List<T> list = repository.findAll();
+		List<T> list = getRepository().findAll();
 		return list;
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public List<T> findAll(int firstItem, int maxItem) {
-		List<T> list = repository.findAll(firstItem, maxItem);
+		List<T> list = getRepository().findAll(firstItem, maxItem);
 		return list;
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public T findByKey(ID id) {
-		return repository.findByKey(id);
+		return getRepository().findByKey(id);
 	}
 	
 	@Override
 	@Transactional(readOnly=true)
 	public Long getRowCount() {
-		return repository.getRowCount();
+		return getRepository().getRowCount();
 	}
 
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false, rollbackFor=Throwable.class)
 	public void insert(T bean) {
-		repository.insert(bean);
+		getRepository().insert(bean);
 	}
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false, rollbackFor=Throwable.class)
 	public void update(T bean) {
-		repository.update(bean);
+		getRepository().update(bean);
 	}
 	
 	@Override
 	@Transactional(propagation=Propagation.REQUIRED, readOnly=false, rollbackFor=Throwable.class)
 	public void delete(T bean) {
-		repository.delete(bean);
+		getRepository().delete(bean);
 	}
 	
 }

@@ -20,7 +20,7 @@
 				
 					<h:panelGroup>
 					
-						<h:panelGroup>
+						<h:panelGroup id="searchFieldsGroupId">
 						
 							<h:form>
 							
@@ -31,7 +31,8 @@
 								
 								</h:panelGrid>
 							
-								<p:commandButton value="Pesquisar" action="#{controller.find}" update="resultGroupId"/>
+								<p:commandButton value="Pesquisar" action="#{controller.find}" ajax="false"/>
+								<p:commandButton value="Novo" action="#{controller.prepareInsert}" ajax="false"/>
 							
 							</h:form>
 						

@@ -31,26 +31,47 @@ public class GenericAbstractController<Entity extends BaseEntity, Key extends Se
 		searchList = getService().find(getSearchEntity());
 	}
 	
+	public void save() {
+		getService().insert(getEntity());
+	}
+	
+	public void update() {
+		getService().update(getEntity());
+	}
+	
+	public String prepareInsert() {
+		initEntity();
+		return getFormPageLocation();
+	}
+	
+	public void initEntity() {
+		try {
+			entity = getEntityClass().newInstance();
+			entity.init();
+		} catch (InstantiationException | IllegalAccessException e) {
+			getLogger().log(Level.SEVERE, "Erro ao instanciar a entidade  " + getEntityClass(), e);
+		} 
+	}
+	
+	public void initEntitySearch() {
+		try {
+			searchEntity = getEntityClass().newInstance();
+			searchEntity.init();
+		} catch (InstantiationException | IllegalAccessException e) {
+			getLogger().log(Level.SEVERE, "Erro ao instanciar a entidade  " + getEntityClass(), e);
+		} 
+	}
+	
 	public Entity getEntity() {
 		if(entity == null){
-			try {
-				entity = getEntityClass().newInstance();
-				entity.init();
-			} catch (InstantiationException | IllegalAccessException e) {
-				getLogger().log(Level.SEVERE, "Erro ao instanciar a entidade  " + getEntityClass(), e);
-			} 
+			initEntity();
 		}
 		return entity;
 	}
 	
 	public Entity getSearchEntity() {
 		if(searchEntity == null){
-			try {
-				searchEntity = getEntityClass().newInstance();
-				searchEntity.init();
-			} catch (InstantiationException | IllegalAccessException e) {
-				getLogger().log(Level.SEVERE, "Erro ao instanciar a entidade  " + getEntityClass(), e);
-			} 
+			initEntitySearch();
 		}
 		return searchEntity;
 	}
