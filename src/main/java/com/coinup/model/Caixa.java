@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.coinup.exceptions.SaldoNegativoException;
 import com.coinup.framework.dao.BaseEntity;
+import com.coinup.model.CaixaPeriodicidade.TYPES;
 import com.coinup.utils.NumberUtils;
 
 @Entity
@@ -75,6 +76,23 @@ public class Caixa extends BaseEntity {
 			setSaldo(result);
 		}
 		return getSaldo();
+	}
+	
+	public String getPeriodicidade() {
+		if (getCaixaPeriodicidade() != null) {
+			TYPES type = getCaixaPeriodicidade().findCaixaPeriodicidadeType();
+			if (type != null) {
+				return type.getLabel();
+			}
+		} return null;
+	}
+	
+	public boolean isFechado() {
+		return getDataFechamento() != null; 
+	}
+	
+	public boolean isAberto() {
+		return !isFechado();
 	}
 	
 	public BigDecimal getSaldo() {

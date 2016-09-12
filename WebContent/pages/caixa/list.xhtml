@@ -44,8 +44,32 @@
 								value="#{controller.searchList}"
 								var="entity">
 							
+								<p:column headerText="#">
+									<h:outputText value="#{entity.id}"/>
+								</p:column>
+							
 								<p:column headerText="Saldo">
 									<h:outputText value="#{entity.saldo}"/>
+								</p:column>
+								
+								<p:column headerText="Abertura">
+									<h:outputText value="#{entity.dataCriacao}"/>
+								</p:column>
+								
+								<p:column headerText="Total Entradas">
+									<h:outputText value="#{entity.totalEntrada}"/>
+								</p:column>
+								
+								<p:column headerText="Total Saídas">
+									<h:outputText value="#{entity.totalSaida}"/>
+								</p:column>
+								
+								<p:column headerText="Periodicidade">
+									<h:outputText value="#{entity.periodicidade}"/>
+								</p:column>
+								
+								<p:column headerText="Fechado?">
+									<h:outputText value="#{entity.fechado}"/>
 								</p:column>
 							
 							</p:dataTable>

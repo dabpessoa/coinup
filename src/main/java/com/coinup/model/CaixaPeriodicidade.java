@@ -17,9 +17,9 @@ public class CaixaPeriodicidade extends BaseEntity {
 	private static final long serialVersionUID = 7663316095550832491L;
 
 	public static enum TYPES {
-		DIA("dia"),
-		MES("mes"),
-		ANO("ano"),
+		DIA("diário"),
+		MES("mensal"),
+		ANO("anual"),
 		DECADA("decada");
 		
 		private String label;
