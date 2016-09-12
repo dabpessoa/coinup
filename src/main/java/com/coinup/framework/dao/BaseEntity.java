@@ -2,42 +2,26 @@ package com.coinup.framework.dao;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class BaseEntity implements Serializable {
-	private static final long serialVersionUID = -8972293881699392185L;
-	
-	@Id
-	@Column(name="id")
-	private Long id;
-	
+public abstract class BaseEntity implements Serializable {
+	private static final long serialVersionUID = -3729958615488101692L;
+
 	public BaseEntity() {}
-	
-	public BaseEntity(Long id) {
-		this.id = id;
-	}
 
 	/**
 	 * Método para inicializar objetos que a entidade depende.
 	 */
 	public void init() {}
 	
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
+	public abstract Long getId();
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
 		return result;
 	}
 
@@ -50,17 +34,17 @@ public class BaseEntity implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		BaseEntity other = (BaseEntity) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (getId() == null) {
+			if (other.getId() != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!getId().equals(other.getId()))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Entity [id=" + id + "]";
+		return "Entity [id=" + getId() + "]";
 	}
 
 }

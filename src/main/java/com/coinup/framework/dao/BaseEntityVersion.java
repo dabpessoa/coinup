@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class BaseEntityVersion extends BaseEntity {
+public abstract class BaseEntityVersion extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="version")
@@ -12,12 +12,8 @@ public class BaseEntityVersion extends BaseEntity {
 	
 	public BaseEntityVersion() {}
 	
-	public BaseEntityVersion(Long id) {
-		super(id);
-	}
-	
-	public BaseEntityVersion(Long id, Long version) {
-		this(id);
+	public BaseEntityVersion(Long version) {
+		this();
 		this.version = version;
 	}
 	

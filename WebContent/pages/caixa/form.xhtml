@@ -29,20 +29,11 @@
 					</h:panelGrid>
 					
 					<p:commandButton value="Salvar" actionListener="#{controller.save()}" oncomplete="handleComplete(xhr, status, args);" update="formPageGroupId"/>
-					<h:outputLink id="navigateListPageLinkId" value="#{baseURL}#{controller.listPageLocation}" style="display: none;"/>
 				
 				</h:form>	
 			
 			</h:panelGroup>
 			
-			<script type="text/javascript">
-				function handleComplete(xhr, status, args) {
-					if (!args.validationFailed &amp;&amp; !args.erroAjuste) {
-						// navigate
-						$("#navigateListPageLinkId").click();
-					}
-				}
-			</script>
 		</h:panelGroup>
 		
 	</ui:define>

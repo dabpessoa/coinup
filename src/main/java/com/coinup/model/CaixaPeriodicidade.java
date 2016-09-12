@@ -2,12 +2,17 @@ package com.coinup.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.coinup.framework.dao.BaseEntity;
 
 @Entity
 @Table(name="caixa_periodicidade", schema="coinup")
+@SequenceGenerator(name="seq", sequenceName="caixa_periodicidade_id_seq")
 public class CaixaPeriodicidade extends BaseEntity {
 	private static final long serialVersionUID = 7663316095550832491L;
 
@@ -22,6 +27,11 @@ public class CaixaPeriodicidade extends BaseEntity {
 		public String getLabel(){return this.label;};
 	}
 	
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+	private Long id;
+	
 	@Column(name="label")
 	private String label;
 	
@@ -31,14 +41,17 @@ public class CaixaPeriodicidade extends BaseEntity {
 	public CaixaPeriodicidade() {}
 	
 	public CaixaPeriodicidade(Long id) {
-		super(id);
+		this();
+		setId(id);
 	}
 
 	public CaixaPeriodicidade(String label) {
+		this();
 		this.label = label;
 	}
 	
 	public CaixaPeriodicidade(String label, String descricao) {
+		this();
 		this.label = label;
 		this.descricao = descricao;
 	}
@@ -70,6 +83,15 @@ public class CaixaPeriodicidade extends BaseEntity {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

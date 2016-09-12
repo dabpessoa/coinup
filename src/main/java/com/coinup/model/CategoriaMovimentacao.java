@@ -1,7 +1,18 @@
 package com.coinup.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
 import com.coinup.framework.dao.BaseEntity;
 
+@Entity
+@Table (name = "categoria_movimentacao" , schema = "coinup")
+@SequenceGenerator(name="seq", sequenceName="categoria_movimentacao_id_seq")
 public class CategoriaMovimentacao extends BaseEntity {
 	private static final long serialVersionUID = 6862936660257401821L;
 
@@ -21,6 +32,11 @@ public class CategoriaMovimentacao extends BaseEntity {
 		AJUDA,
 		EMPRESTIMO;
 	}
+	
+	@Id
+	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq")
+	private Long id;
 	
 	private String label;
 	private String descricao;
@@ -52,6 +68,15 @@ public class CategoriaMovimentacao extends BaseEntity {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
