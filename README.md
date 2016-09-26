@@ -1,5 +1,5 @@
 # CoinUp!
-==================
+-------------------------
 
 Aplicação para controle financeiro.
 
